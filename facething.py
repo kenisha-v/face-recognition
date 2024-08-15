@@ -6,20 +6,18 @@ cap = cv2.VideoCapture(0)
 
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
 
-skip = 0 
 face_data = []
 dataset_path = './data/'
 
 file_name = input("Enter the name of the person : ")
 
-# Ensure the dataset directory exists
+# Create dataset directory if it doesn't exist
 if not os.path.exists(dataset_path):
     os.makedirs(dataset_path)
 
 while True:
     ret, frame = cap.read()
-
-    if ret == False:
+    if not ret:
         continue
 
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -36,8 +34,7 @@ while True:
         face_section = frame[y-offset:y+h+offset, x-offset:x+w+offset]
         face_section = cv2.resize(face_section, (100, 100))
 
-        skip += 1
-        if skip % 10 == 0:
+        if len(face_data) % 10 == 0:
             face_data.append(face_section)
             print(len(face_data))
 
@@ -54,6 +51,7 @@ face_data = np.asarray(face_data)
 face_data = face_data.reshape((face_data.shape[0], -1))
 print(face_data.shape)
 
+# Save the collected face data
 np.save(dataset_path + file_name + '.npy', face_data)
 print("Data successfully saved at " + dataset_path + file_name + '.npy')
 
