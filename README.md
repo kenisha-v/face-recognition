@@ -18,10 +18,10 @@ pip install opencv-python numpy
 
 ### 1. Collect Face Data
 
-Run `face_data_collection.py` to capture face data using your webcam.
+Run `facething.py` to capture face data using your webcam.
 
 ```bash
-python face_data_collection.py
+python facething.py
 ```
 
 - Enter a name when prompted.
@@ -33,10 +33,10 @@ python face_data_collection.py
 
 ### 2. Recognize Faces
 
-Run `face_recognition.py` to recognize faces in real-time.
+Run `face_recog.py` to recognize faces in real-time.
 
 ```bash
-python face_recognition.py
+python face_recog.py
 
 ```
 - Detected faces will display with their associated name.
